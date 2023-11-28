@@ -1,0 +1,14 @@
+﻿/* Styles for the header/navbar */
+.navbar {
+    background-color: #e6e6fa;
+}
+
+/* Styles for the navigation links in the navbar */
+.navbar-nav .nav-link {
+    color: black;
+}
+
+    /* Style for the navigation links on hover */
+    .navbar-nav .nav-link:hover {
+        color: cornflowerblue !important;
+    }
