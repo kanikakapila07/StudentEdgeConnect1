@@ -16,6 +16,12 @@ namespace StudentEdgeConnect1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (!IsPostBack)
+            {
+                string username = Session["E_username"] as string;
+            }
             string currentTab = "edit-profile";
             if (currentTab == "edit-profile")
             {
@@ -116,8 +122,7 @@ namespace StudentEdgeConnect1
             //accepts job application
             protected void Button7_Click(object sender, EventArgs e)
             {
-            if (checkExists())
-            {
+           
                 try
                 {
                     //establish connection
@@ -132,22 +137,10 @@ namespace StudentEdgeConnect1
 
 
                     SqlCommand cmd = new SqlCommand(Query, con);
-                    cmd.Parameters.AddWithValue("@StudentID", StudentID);
-                    int count = (int)cmd.ExecuteNonQuery();
-                    if (count > 0)
-                    {
-                        Response.Write("<script>alert('Application Accepted!');</script>");
-                        con.Close();
-
-
-
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('No Application Found!');</script>");
-                        con.Close();
-
-                    }
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('Accepted!');</script>");
+                    
                 }
                 catch (Exception exception)
                 {
@@ -155,18 +148,13 @@ namespace StudentEdgeConnect1
                     Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
 
                 }
-            }
-            else
-            {
-                Response.Write("<script>alert('No Application Found!');</script>");
-            }
+           
         }
             
             //rejects job application
              protected void Button9_Click(object sender, EventArgs e)
             {
-            if (checkExists())
-            {
+            
                 try
                 {
                     //establish connection
@@ -179,25 +167,11 @@ namespace StudentEdgeConnect1
                     string StudentID = TextBox34.Text.Trim();
                     string Query = "INSERT INTO Status(JobID, StudentID, ApplicationStatus) VALUES('" + JobID + "', '" + StudentID + "','Rejected')";
 
-                    ;
-
+                  
                     SqlCommand cmd = new SqlCommand(Query, con);
-                    cmd.Parameters.AddWithValue("@StudentID", StudentID);
-                    int count = (int)cmd.ExecuteNonQuery();
-                    if (count > 0)
-                    {
-                        Response.Write("<script>alert('Application Rejected!');</script>");
-                        con.Close();
-
-
-
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('No Application Found!');</script>");
-                        con.Close();
-
-                    }
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('Rejected!');</script>");
                 }
                 catch (Exception exception)
                 {
@@ -205,11 +179,7 @@ namespace StudentEdgeConnect1
                     Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
 
                 }
-            }
-            else
-            {
-                Response.Write("<script>alert('No Application Found!');</script>");
-            }
+           
         }
 
             //go button for searching student id

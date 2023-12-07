@@ -18,14 +18,14 @@ namespace StudentEdgeConnect1
         {
             GridView1.DataBind();
         }
-        //update
+        
+        //Update Job Info
         protected void Button1_Click(object sender,EventArgs e)
         {
             if (checkExists())
             {
                 updateJobInfo();
                 
-
             }
             else
             {
@@ -33,7 +33,7 @@ namespace StudentEdgeConnect1
                 Response.Write("<script>alert('Job with this ID doesn't exist!');</script>");
             }
         }
-        //add
+        //Add Job
         protected void Button2_Click(object sender, EventArgs e)
         {
             if (checkExists())
@@ -47,7 +47,7 @@ namespace StudentEdgeConnect1
             }   
 
         }
-        //delete
+        //Delete Job
         protected void Button3_Click(object sender, EventArgs e)
         {
             if(checkExists())
@@ -62,6 +62,7 @@ namespace StudentEdgeConnect1
 
         }
 
+        //check Job Exists
         bool checkExists()
         {
             try
@@ -98,7 +99,7 @@ namespace StudentEdgeConnect1
             return false;
         }
 
-        //new job 
+        //add new Job
         void addNewJob()
         {
             try
@@ -109,6 +110,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
+
                 //prepare query
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
@@ -130,10 +132,9 @@ namespace StudentEdgeConnect1
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
                 Response.Write("<script>alert('Added Successfully!');</script>");
                 clear();
                 GridView1.DataBind();
@@ -146,6 +147,7 @@ namespace StudentEdgeConnect1
 
         }
 
+        //update new Job
         void updateJobInfo()
         {
 
@@ -157,6 +159,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
+
                 //prepare query
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
@@ -171,18 +174,14 @@ namespace StudentEdgeConnect1
                 string Company = TextBox11.Text.Trim();
                 string CompanyLocation = TextBox12.Text.Trim();
 
-
-
                 string Query = "UPDATE jobs_table SET JobPosition = '" + JobPosition + "', Pay = '" + Pay + "', ApplicationDeadline = '" + ApplicationDeadline + "', Requirements = '" + Requirements + "', EmploymentType = '" + EmploymentType + "', Benefits = '" + Benefits + "', Description = '" + Description + "', HowToApply = '" + HowToApply + "', SkillName = '" + SkillName + "', Company = '" + Company + "', CompanyLocation = '" + CompanyLocation + "' WHERE JobID = '" + JobID + "'";
-
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
 
                 Response.Write("<script>alert('Updated Successfully');</script>");
                 clear();
@@ -204,6 +203,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
+
                 //prepare query
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
@@ -218,16 +218,15 @@ namespace StudentEdgeConnect1
                 string Company = TextBox11.Text.Trim();
                 string CompanyLocation = TextBox12.Text.Trim();
 
-
-
                 string Query = "DELETE FROM jobs_table WHERE JobID = '" + JobID + "'";
+
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
+     
                 Response.Write("<script>alert('Deleted Successfully');</script>");
                 clear();
                 GridView1.DataBind();
@@ -238,7 +237,6 @@ namespace StudentEdgeConnect1
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
         }
-
 
         void clear()
         {
@@ -254,9 +252,6 @@ namespace StudentEdgeConnect1
             TextBox10.Text="";
             TextBox11.Text="";
             TextBox12.Text="";
-
-
-
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

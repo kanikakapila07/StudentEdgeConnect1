@@ -27,9 +27,13 @@ namespace StudentEdgeConnect1
         }
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("logout.aspx");
+            Session.Remove("role");
+            Session.Remove("S_username");
+            Session.Remove("E_username");
+
 
             Response.Redirect("homepage.aspx");
+
 
 
 
@@ -44,8 +48,7 @@ namespace StudentEdgeConnect1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
+            if (!IsPostBack) {
 
                 if (Session["role"] == null)
                 {
@@ -76,11 +79,8 @@ namespace StudentEdgeConnect1
                     LinkButton5.Visible = true; //Hello user
                     LinkButton5.Text = "Hello" + Session["S_username"].ToString();
                 }
-            }
-            catch (Exception exception)
-            {
-                Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
-            }
+            
+           }
         }
     }
 }

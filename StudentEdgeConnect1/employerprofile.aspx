@@ -513,7 +513,7 @@
                               <div class="col-md-8">
                                 <label>Applied Job ID</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="TextBox39" runat="server" placeholder="JobID" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="TextBox39" runat="server" placeholder="JobID" ></asp:TextBox>
                                 </div>
                             </div>
                             <!--Applied Job Name-->

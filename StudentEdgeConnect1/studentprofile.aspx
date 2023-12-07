@@ -26,7 +26,7 @@
                 <a class="nav-link" data-toggle="tab" href="#apply-jobs" role="tab">Apply Jobs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#view-applied-jobs" role="tab">View Applied Jobs</a>
+                <a class="nav-link" data-toggle="tab" href="#view-application-status" role="tab">View Application Status</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#registered-events" role="tab">View Networking Events</a>
@@ -237,34 +237,42 @@
     </div>
          </div>      
 
-  <div class="tab-pane fade" id="view-applied-jobs" role="tabpanel">
-                <!-- Content for View Applied Jobs Tab -->
-                <!--not working--> 
+  <div class="tab-pane fade" id="view-application-status" role="tabpanel">
+                
+                
               
        <div class="scroll-container">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Applied Jobs List</h4>
+                        <h4>View Application Status</h4>
                         <hr />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT a.JobID, a.JobPosition, s.StudentID, s.ApplicationStatus FROM appliedjobs_table a INNER JOIN Status s ON a.JobID = s.JobID;"></asp:SqlDataSource>
-                        <asp:GridView class="table table-striped table-bordered" ID="GridView3" runat="server" OnSelectedIndexChanged="GridView3_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="JobID" DataSourceID="SqlDataSource2">
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT * FROM [Status] WHERE StudentID = @StudentID">
+    <SelectParameters>
+        <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
+    </SelectParameters>
+</asp:SqlDataSource>
+                       
+                        <asp:GridView class="table table-striped table-bordered" ID="GridView3" runat="server" OnSelectedIndexChanged="GridView3_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="JobID" >
+                         
+   
                             <Columns>
                                 
 
                   <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
-                  <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />
+                 
                   <asp:BoundField DataField="StudentID" HeaderText="StudentID" SortExpression="StudentID" />
                   <asp:BoundField DataField="ApplicationStatus" HeaderText="ApplicationStatus" SortExpression="ApplicationStatus" />
                  
+                 
                 <asp:TemplateField HeaderText="Withdraw">
                 <ItemTemplate>
-                <asp:LinkButton ID=Button16 runat="server" Text="Withdraw" OnClick="Button16_Click"  />
+                <asp:LinkButton ID="Button16" runat="server" Text="Withdraw" OnClick="Button16_Click" />
                 </ItemTemplate>
                 </asp:TemplateField>
 
@@ -340,6 +348,80 @@
             </div>
             <div class="tab-pane fade" id="certifications" role="tabpanel">
                 <!-- Content for Certifications Completed Tab -->
+                 <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <center>
+                                    <h4>Add Links</h4>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <center>
+                                    <img width="100px" src="images/jobs.png" />
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <!-- Certification Link -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Link</label>
+                                <div class="form-group">
+                                    <asp:TextBox CssClass="form-control" ID="TextBox6" runat="server" placeholder="Link"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add Button -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <asp:Button ID="Button2" CssClass="btn btn-success btn-block" runat="server" Text="Add" OnClick="Button2_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <a href="studentprofile.aspx">&lt;&lt; Back</a><br /><br />
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <center>
+                                    <h4>Certifications List</h4>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT * FROM [certifications]"></asp:SqlDataSource>
+                            <div class="col">
+                                <asp:GridView class="table table-striped table-bordered" ID="GridView6" runat="server" OnSelectedIndexChanged="GridView6_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="Link" DataSourceID="SqlDataSource1">
+                                    <Columns>
+                                        <asp:BoundField DataField="Link" HeaderText="Link" SortExpression="Link" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                 
             </div>
         </div>

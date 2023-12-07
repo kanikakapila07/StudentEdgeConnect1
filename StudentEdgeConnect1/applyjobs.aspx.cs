@@ -17,92 +17,54 @@ namespace StudentEdgeConnect1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) 
+            if (!IsPostBack)
             {
                 if (Session["S_username"] != null)
                 {
-                   
-                    getStudentID();
-                    GridView1.DataBind(); 
+                    string studentID = RetrieveStudentID(); // Function to retrieve the StudentID
+
+                    // Set the StudentID parameter for the SqlDataSource
+                    SqlDataSource.SelectParameters["StudentID"].DefaultValue = studentID;
+
+                    GridView1.DataBind();
                 }
-              
             }
         }
 
-
-
-        void getStudentID()
+        private string RetrieveStudentID()
         {
+            string loggedInUsername = Session["S_username"].ToString();
+            string studentID = "";
+
             try
             {
-                if (Session["S_username"] != null)
+                using (SqlConnection con = new SqlConnection(ConnectionString))
                 {
-                    string loggedInUsername = Session["S_username"].ToString();
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT StudentID FROM student WHERE S_username = @S_username", con);
+                    cmd.Parameters.AddWithValue("@S_username", loggedInUsername);
 
-                   
-                    Response.Write("<script>alert('Logged In Username: " + loggedInUsername + "');</script>");
-
-                    using (SqlConnection con = new SqlConnection(ConnectionString))
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
                     {
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand("SELECT StudentID FROM student WHERE S_username = @S_username", con);
-                        cmd.Parameters.AddWithValue("@S_username", loggedInUsername);
-                        SqlDataReader reader = cmd.ExecuteReader();
-
-                        if (reader.Read())
-                        {
-                            TextBox1.Text = reader["StudentID"].ToString();
-                        }
-                        else
-                        {
-                           
-                            Response.Write("<script>alert('No data found ');</script>");
-                        }
-
-                        reader.Close();
-                        con.Close();
+                        studentID = result.ToString();
                     }
-                }
-                else
-                {
-                  
-                    Response.Write("<script>alert('Session variable S_username is null or not set');</script>");
-                   
+                    else
+                    {
+                        Response.Write("<script>alert('No data found');</script>");
+                    }
                 }
             }
             catch (Exception exception)
             {
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
+
+            return studentID;
         }
 
 
 
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            applyJob();
-             
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         void applyJob()
         {
             try
@@ -117,9 +79,17 @@ namespace StudentEdgeConnect1
                 string GraduationDate = TextBox55.Text.Trim();
                 string StudentID = TextBox1.Text.Trim();
 
-                SqlConnection con = new SqlConnection(ConnectionString);
-                    
-                        con.Open();
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    con.Open();
+
+                    // Check if the provided StudentID matches the retrieved StudentID
+                    SqlCommand checkCmd = new SqlCommand("SELECT StudentID FROM student WHERE S_username = @S_username", con);
+                    checkCmd.Parameters.AddWithValue("@S_username", Session["S_username"].ToString());
+                    object result = checkCmd.ExecuteScalar();
+
+                    if (result != null && result.ToString() == StudentID)
+                    {
                         // Query to insert job application details
                         string query = "INSERT INTO appliedjobs_table(JobID, JobPosition, Company, CompanyLocation, EducationLevel, UniversityName, GraduationDate, StudentID) VALUES(@JobID, @JobPosition, @Company, @CompanyLocation, @EducationLevel, @UniversityName, @GraduationDate, @StudentID)";
 
@@ -135,19 +105,45 @@ namespace StudentEdgeConnect1
 
                         cmd.ExecuteNonQuery();
 
-                        con.Close();
-
                         Response.Write("<script>alert('Added Successfully!');</script>");
                         GridView1.DataBind();
                     }
-                
-               
-            
+                    else
+                    {
+                        Response.Write("<script>alert('StudentID does not match. Cannot insert the job details.');</script>");
+                    }
+                }
+            }
             catch (Exception exception)
             {
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            applyJob();
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,21 +4,21 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-            //$('.table1').DataTable();
+          
 
         });
 
 
     </script>
     <script>
-    $(document).ready(function() {
-    $('.table').parent().css('overflow-x', 'auto');
-    $('.table').parent().css('width', '100%'); 
+        $(document).ready(function() {
+        $('.table').parent().css('overflow-x', 'auto');
+        $('.table').parent().css('width', '100%'); 
 
-    $('.table').css('width', '100px'); 
+        $('.table').css('width', '100px'); 
     
-    $('.table').prepend($('<thead></thead>').append($(this).find('tr:first'))).dataTable();
-    });
+        $('.table').prepend($('<thead></thead>').append($(this).find('tr:first'))).dataTable();
+        });
     </script>
      
   
@@ -170,18 +170,18 @@
                             </div>
                           
                         </div>
-                        <!--add-->
+                        <!--Add Button-->
                         <div class="row">
                             <div class="col-4">
                                 <asp:Button ID="Button2" class="btn btn-lg btn-block btn-success" runat="server" Text="Add" OnClick="Button2_Click" />
                             </div>
-                            <!--Update -->
+                            <!--Update Button -->
                             
                             <div class="col-4">
                                 <asp:Button ID="Button1" class="btn btn-lg btn-block btn-primary" runat="server" Text="Update"  OnClick="Button1_Click"/>
                             </div>
 
-                             <!--Delete -->
+                             <!--Delete Button-->
                                
                                 <div class="col-4">
                                 <asp:Button ID="Button3" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete" OnClick="Button3_Click" />

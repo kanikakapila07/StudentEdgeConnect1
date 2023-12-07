@@ -71,6 +71,7 @@
     <Content Include="addjobs.aspx" />
     <Content Include="applicationstatus.aspx" />
     <Content Include="applyjobs.aspx" />
+    <Content Include="logout.aspx" />
     <Content Include="registerevents.aspx" />
     <Content Include="showjobpostings.aspx" />
     <Content Include="bootstrap\css\css\bootstrap.min.css" />
@@ -2189,6 +2190,13 @@
     </Compile>
     <Compile Include="applyjobs.aspx.designer.cs">
       <DependentUpon>applyjobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="registerevents.aspx.cs">
       <DependentUpon>registerevents.aspx</DependentUpon>

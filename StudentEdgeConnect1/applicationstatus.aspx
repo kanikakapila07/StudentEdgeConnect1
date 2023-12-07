@@ -6,21 +6,59 @@
  <div class="container">
         <h2>Applications Status</h2>
        
-        <asp:GridView ID="GridViewApplications" runat="server">
-          
-            <Columns>
-                <asp:BoundField DataField="ApplicantName" HeaderText="Applicant Name" />
-                <asp:BoundField DataField="ApplicantName" HeaderText="Applicant Name" />
-                <asp:BoundField DataField="ApplicationDate" HeaderText="Application Date" />
-                <asp:BoundField DataField="Status" HeaderText="Status" />
-                <asp:TemplateField HeaderText="Action">
-                    <ItemTemplate>
-                        <!-- Add buttons for accepting/rejecting applications -->
-                        <asp:Button runat="server" ID="AcceptButton" Text="Accept"  />
-                        <asp:Button runat="server" ID="RejectButton" Text="Reject" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-    </div>
+        
+   
+                 <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <center>
+                                    <h4>Application Status</h4>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col" >
+                                <hr>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+
+                          <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT s.JobID, s.StudentID, COALESCE(s.ApplicationStatus, 'Pending') AS ApplicationStatus 
+                          FROM Status s INNER JOIN appliedjobs_table a ON s.StudentID = a.StudentID;">
+                              <SelectParameters>
+        <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
+    </SelectParameters>
+</asp:SqlDataSource>
+                         
+    
+
+                            
+
+                            <div class="col">
+                              
+                                <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="StudentID" DataSourceID="SqlDataSource3" >
+                                    <Columns>
+                                       
+                                        <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
+                                        
+                                        <asp:BoundField DataField="StudentID" HeaderText="StudentID" SortExpression="StudentID" />
+                                          
+                                        <asp:BoundField DataField="ApplicationStatus" HeaderText="ApplicationStatus" SortExpression="ApplicationStatus" NullDisplayText="Pending" />
+                                        
+                                        
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+                              
 </asp:Content>

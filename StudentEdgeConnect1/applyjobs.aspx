@@ -1,24 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="applyjobs.aspx.cs" Inherits="StudentEdgeConnect1.applyjobs" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <script type="text/javascript">
-        $(document).ready(function (){
+        $(document).ready(function () {
             $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-            //$('.table1').DataTable();
-
+            
         });
 
 
     </script>
     <script>
-    $(document).ready(function() {
-    $('.table').parent().css('overflow-x', 'auto');
-    $('.table').parent().css('width', '100%'); 
+        $(document).ready(function () {
+            $('.table').parent().css('overflow-x', 'auto');
+            $('.table').parent().css('width', '100%');
 
-    $('.table').css('width', '100px'); 
-    
-    $('.table').prepend($('<thead></thead>').append($(this).find('tr:first'))).dataTable();
-    });
+            $('.table').css('width', '100px');
+
+            $('.table').prepend($('<thead></thead>').append($(this).find('tr:first'))).dataTable();
+        });
     </script>
 
 </asp:Content>
@@ -69,14 +69,14 @@
                                     <asp:TextBox CssClass="form-control" ID="TextBox52" runat="server" placeholder="JobPosition"  ></asp:TextBox>
                                 </div>
                             </div>
-                            <!--company-->
+                            <!--Company-->
                              <div class="col-md-8">
                                 <label>Company</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox2" runat="server"  placeholder="Company"></asp:TextBox>
                                 </div>
                             </div>
-                              <!--location-->
+                              <!--Location-->
                              <div class="col-md-8">
                                 <label>CompanyLocation</label>
                                 <div class="form-group">
@@ -97,9 +97,6 @@
                                 </div>
                             </div>
 
-                          
-
-                          
                               <!--University Name-->
                               <div class="col-md-8">
                                 <label>University Name</label>
@@ -107,6 +104,7 @@
                                     <asp:TextBox CssClass="form-control" ID="TextBox54" runat="server" placeholder="UniversityName"></asp:TextBox>
                                 </div>
                             </div>
+
                              <!--Graduation Date-->
                               <div class="col-md-8">
                                 <label>Graduation Date</label>
@@ -115,7 +113,7 @@
                                 </div>
                             </div>
                             
-                               <!--sTUDENT ID-->
+                               <!--Student ID-->
                               <div class="col-md-8">
                                 <label>Student ID</label>
                                 <div class="form-group">
@@ -123,11 +121,9 @@
                                 </div>
                             </div>
                              
-                            
-                              
-                          
+                       
                         </div>
-                        <!--apply-->
+                        <!--Apply Button-->
                         <div class="row">
                             <div class="col-4">
                                 <asp:Button ID="Button2" class="btn btn-lg btn-block btn-success" runat="server" Text="Apply" OnClick="Button2_Click" />
@@ -136,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="showjobpostings.aspx">&lt;&lt; Bac</a><br><br>
+                <a href="showjobpostings.aspx">&lt;&lt; Back</a><br><br>
             </div>
             <div class="col-md-7" >
                 <div class="card" >
@@ -154,12 +150,15 @@
                             </div>
                         </div>
                         <div class="row">
-                          <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT * FROM [appliedjobs_table]">
-
-                        </asp:SqlDataSource>
+                           <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>"
+    SelectCommand="SELECT * FROM [appliedjobs_table] WHERE StudentID = @StudentID">
+    <SelectParameters>
+        <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
+    </SelectParameters>
+</asp:SqlDataSource>
                             <div class="col">
                               
-                                <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False"  DataKeyNames="StudentID" DataSourceID="SqlDataSource" >
+                                <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False"  DataKeyNames="StudentID"  DataSourceID="SqlDataSource"   >
                                     <Columns>
                                         <asp:BoundField DataField="JobID" HeaderText="JobID" ReadOnly="true" SortExpression="JobID" />
                                         <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />

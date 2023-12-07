@@ -29,17 +29,12 @@ namespace StudentEdgeConnect1
                 //prepare query
                 string Username = TextBox1.Text.Trim();
                 string Password = TextBox2.Text.Trim();
-                string Query = "(SELECT * FROM student WHERE S_username ='" + Username + "' AND S_Password = '" + Password + "')";
-
-                //Response.Write("<script>alert('Success!');</script>");
-                //Response.Redirect("employerprofile.aspx");
-
-                //execute query
+                string Query = "SELECT * FROM student WHERE S_username = @Username AND S_Password = @Password";
                 SqlCommand cmd = new SqlCommand(Query, con);
-                //cmd.Parameters.AddWithValue("@E_username", Username);
-                //cmd.Parameters.AddWithValue("@E_Password", Password);
+                cmd.Parameters.AddWithValue("@Username", Username);
+                cmd.Parameters.AddWithValue("@Password", Password);
                 SqlDataReader reader = cmd.ExecuteReader();
-                //int count = (int)cmd.ExecuteScalar();
+               
                 if (reader.HasRows)
                 {
 
@@ -47,13 +42,14 @@ namespace StudentEdgeConnect1
                     {
                         //Response.Write("<script>alert('" + reader.GetValue(18).ToString() + "');</script>");
                         //Response.Write("<script>alert('Success');</script>");
-                        Response.Redirect("studentprofile.aspx");
-                        Session["S_username"] = reader.GetValue(17).ToString();
-                        Session["Fname"] = reader.GetValue(0).ToString();
-                        Session["role"] = "Student";
+                       
 
+                        Session["S_username"] = reader["S_username"].ToString();
+                        Session["Fname"] = reader["Fname"].ToString();
+                        Session["role"] = "Student";
+                        Response.Redirect("studentprofile.aspx");
                     }
-                    Response.Redirect("homepage.aspx");
+                    //Response.Redirect("homepage.aspx");
                 }
                 else
                 {

@@ -63,7 +63,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
-                        <a href="showjobpostings.aspx">&lt;&lt; Back</a><br /><br />
+                        <a href="studentprofile.aspx">&lt;&lt; Back</a><br /><br />
                     </div>
                 </div>
             </div>
