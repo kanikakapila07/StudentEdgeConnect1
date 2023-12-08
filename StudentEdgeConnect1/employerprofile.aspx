@@ -66,77 +66,78 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-4 col-form-label text-left">First Name:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="fname" placeholder="First Name:">
-                                    </div>
+                                        <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control"  placeholder="fname"></asp:TextBox>
+                                </div>
                                 </div> 
                                 <div class="form-group row">
                                     <label for="mname" class="col-sm-4 col-form-label text-left">Middle Name:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="mname" placeholder="Middle Name:">
-                                    </div>
+                                        <asp:TextBox ID="TextBox5" runat="server" CssClass="form-control"  placeholder="mname"></asp:TextBox>
+                                </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="lname" class="col-sm-4 col-form-label text-left">Last Name:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="lname" placeholder="Last Name:">
-                                    </div>
+                                         <asp:TextBox ID="TextBox7" runat="server" CssClass="form-control"  placeholder="lname"></asp:TextBox>
                                 </div>
-                                <!-- Additional fields -->
+                                </div>
+                                
                                 <!-- Birthdate -->
                                 <div class="form-group row">
                                     <label for="birthdate" class="col-sm-4 col-form-label text-left">Birthdate:</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="date" id="birthdate">
-                                    </div>
+                                    <div class="col-sm-4">
+                                    <asp:TextBox ID="TextBox9" runat="server" CssClass="form-control"  TextMode="Date" placeholder="birthDate"></asp:TextBox>
                                 </div>
+                                    </div>
+                              
                                 <!--SSN-->
                                 <div class="form-group row">
                                     <label for="ssn" class="col-sm-4 col-form-label text-left">Social Security Number:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="ssn" placeholder="Social Security Number">
-                                    </div>
+                                       <asp:TextBox ID="TextBox13" runat="server" CssClass="form-control" TextMode="Number" placeholder="SSN" required="required"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- Email ID -->
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-4 col-form-label text-left">Email ID:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="email" id="email" placeholder="Email">
-                                    </div>
+                                        <asp:TextBox ID="TextBox14" runat="server" CssClass="form-control" TextMode="Email" placeholder="Email"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- Phone number -->
                                 <div class="form-group row">
                                     <label for="phone" class="col-sm-4 col-form-label text-left">Phone Number:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="tel" id="phone" placeholder="Phone Number">
-                                    </div>
+                                        <asp:TextBox ID="TextBox15" runat="server" CssClass="form-control" TextMode="Phone" placeholder="Phoneno"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- City -->
                                 <div class="form-group row">
                                     <label for="city" class="col-sm-4 col-form-label text-left">City:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="city" placeholder="City">
-                                    </div>
+                                        <asp:TextBox ID="TextBox16" runat="server" CssClass="form-control"  placeholder="City"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- State -->
                                 <div class="form-group row">
                                     <label for="state" class="col-sm-4 col-form-label text-left">State:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="state" placeholder="State">
-                                    </div>
+                                         <asp:TextBox ID="TextBox17" runat="server" CssClass="form-control"  placeholder="State"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- Country -->
                                 <div class="form-group row">
                                     <label for="country" class="col-sm-4 col-form-label text-left">Country:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="country" placeholder="Country">
-                                    </div>
+                                        <asp:TextBox ID="TextBox18" runat="server" CssClass="form-control"  placeholder="Country"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!-- ZIP Code -->
                                 <div class="form-group row">
                                     <label for="zip" class="col-sm-4 col-form-label text-left">ZIP Code:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="zip" placeholder="ZIP Code">
-                                    </div>
+                                       <asp:TextBox ID="TextBox19" runat="server" CssClass="form-control"  placeholder="ZipCode"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!--login credentials--> 
                                 
@@ -155,28 +156,29 @@
                                 <div class="form-group row"> 
                                     <label for="username" class="col-sm-4 col-form-label text-left">Username:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="username" placeholder="Username" readonly>
-                                    </div>
+                                       <asp:TextBox ID="TextBox20" runat="server" CssClass="form-control"  placeholder="username"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!--oldpassword-->
                                 <div class="form-group row">
                                     <label for="oldpassword" class="col-sm-4 col-form-label text-left">Old Password:</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="oldpassword" placeholder="Old Password" TextMode="Old Password" readonly>
-                                    </div>
+                                        <asp:TextBox ID="TextBox42" runat="server" CssClass="form-control" TextMode="Password" placeholder="Old Password" ReadOnly="true"></asp:TextBox>
+                                </div>
                                 </div>
                                 <!--newpassword-->
                                  <div class="form-group row">
-                                    <label for="newpassword" class="col-sm-4 col-form-label text-left">New Password:</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" id="newpassword" placeholder="New Password" TextMode="New Password">
-                                    </div>
+                                     <label for="newpassword" class="col-sm-4 col-form-label text-left">New Password:</label>
+                                        <div class="col-sm-8">
+                                 <asp:TextBox ID="TextBox43" runat="server" CssClass="form-control" TextMode="Password" placeholder="New Password"></asp:TextBox>
                                 </div>
+                            </div>
 
-                                <!-- End of additional fields -->
+
+                              
                                 <div class="form-group">
-                                    <button class="btn btn-success btn-block" type="submit">Update</button>
-                                </div>  
+                                        <asp:Button class="btn btn-success btn-block" ID="Button8" runat="server" Text="Update" OnClick="Button8_Click" />
+                                    </div>  
                                 
                             </form>
                         </div>

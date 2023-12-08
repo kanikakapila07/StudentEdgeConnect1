@@ -56,7 +56,124 @@ namespace StudentEdgeConnect1
         }
         protected void LoadEditProfile()
         {
+            try
+            {
+                string username = Session["S_username"] as string;
 
+                // Connect to the database and fetch user details
+                SqlConnection con = new SqlConnection(ConnectionString);
+                con.Open();
+                string query = "SELECT SSN, S_password, Fname, Mname, Lname, BirthDate, EmailID, Phoneno, City, State, Country, ZipCode,EducationLevel, UniversityName,GraduationDate, S_username FROM student WHERE S_username = @Username";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@Username", username);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        TextBox13.Text = reader["SSN"].ToString();
+                        TextBox43.Text = reader["S_password"].ToString();
+                        TextBox4.Text = reader["Fname"].ToString();
+                        TextBox5.Text = reader["Mname"].ToString();
+                        TextBox7.Text = reader["Lname"].ToString();
+                        TextBox9.Text = reader["BirthDate"].ToString();
+                        TextBox14.Text = reader["EmailID"].ToString();
+                        TextBox15.Text = reader["Phoneno"].ToString();
+                        TextBox16.Text = reader["City"].ToString();
+                        TextBox17.Text = reader["State"].ToString();
+                        TextBox18.Text = reader["Country"].ToString();
+                        TextBox19.Text = reader["ZipCode"].ToString();
+                        TextBox20.Text = reader["S_username"].ToString();
+                        TextBox1.Text = reader["EducationLevel"].ToString();
+                        TextBox2.Text = reader["UniversityName"].ToString();
+                        TextBox3.Text = reader["GraduationDate"].ToString();
+                    }
+                }
+                con.Close();
+
+                Button8.Click += Button8_Click; // Attach the updateUserInfo method to the Button8 Click event
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+        }
+        protected void Button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string ssn = TextBox13.Text.Trim(); // Fetching SSN from the TextBox
+                string newpassword = TextBox43.Text.Trim(); // New password to update
+                string fname = TextBox4.Text.Trim();
+                string mname = TextBox5.Text.Trim();
+                string lname = TextBox7.Text.Trim();
+                string birthDate = TextBox9.Text.Trim();
+                string Email = TextBox14.Text.Trim();
+                string phone = TextBox15.Text.Trim();
+                string city = TextBox16.Text.Trim();
+                string state = TextBox17.Text.Trim();
+                string country = TextBox18.Text.Trim();
+                string zipCode = TextBox19.Text.Trim();
+                string username = TextBox20.Text.Trim();
+                string educationLevel = TextBox18.Text.Trim();
+                string universityName = TextBox19.Text.Trim();
+                string graduationDate = TextBox20.Text.Trim();
+
+
+
+
+                // Connection establishment
+                SqlConnection con = new SqlConnection(ConnectionString);
+                con.Open();
+
+                // SQL Update Query
+                string query = "UPDATE student SET S_password = @NewPassword, Fname = @Fname, Mname = @Mname, Lname = @Lname, BirthDate = @BirthDate, EmailID = @Email, Phone = @Phone, City = @City, State = @State, Country = @Country, ZipCode = @ZipCode, GraduationDate= @GraduationDate, EducationLevel=@EducationLevel, UniversityName=@UniversityName, S_username = @Username WHERE SSN = @SSN";
+
+
+                // SQL Command creation
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                // Adding parameters to prevent SQL Injection
+                cmd.Parameters.AddWithValue("@NewPassword", newpassword);
+                cmd.Parameters.AddWithValue("@Fname", fname);
+                cmd.Parameters.AddWithValue("@Mname", mname);
+                cmd.Parameters.AddWithValue("@Lname", lname);
+                cmd.Parameters.AddWithValue("@BirthDate", birthDate);
+                cmd.Parameters.AddWithValue("@Email", Email);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@City", city);
+                cmd.Parameters.AddWithValue("@State", state);
+                cmd.Parameters.AddWithValue("@Country", country);
+                cmd.Parameters.AddWithValue("@ZipCode", zipCode);
+                cmd.Parameters.AddWithValue("@GraduationDate", graduationDate);
+                cmd.Parameters.AddWithValue("@EducationLevel", educationLevel);
+                cmd.Parameters.AddWithValue("@UniversityName", universityName);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@SSN", ssn);
+            
+
+                // Executing the query
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                con.Close();
+
+                if (rowsAffected > 0)
+                {
+                    // If the update was successful
+                    Response.Write("<script>alert('Updated successfully!');</script>");
+                }
+                else
+                {
+                    // If no rows were affected (no matching SSN found)
+                    Response.Write("<script>alert('No employer found with the provided SSN.');</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, if any
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
         }
         protected void LoadAppliedJobs()
 
