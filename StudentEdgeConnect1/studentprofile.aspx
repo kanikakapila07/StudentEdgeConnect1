@@ -93,7 +93,7 @@
                                     <div class="col-sm-8">
                                        <asp:TextBox ID="TextBox13" runat="server" CssClass="form-control" TextMode="Number" placeholder="SSN" required="required"></asp:TextBox>
                                 </div>
-                                </div>
+                                </div>  
                                 <!-- Email ID -->
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-4 col-form-label text-left">Email ID:</label>
