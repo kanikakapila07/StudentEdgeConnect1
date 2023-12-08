@@ -24,12 +24,18 @@ namespace StudentEdgeConnect1
             {
                 //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
+
                 //open connection
                 con.Open();
-                //prepare query
+
+              
                 string Username = TextBox1.Text.Trim();
                 string Password = TextBox2.Text.Trim();
+
+                //prepare query
                 string Query = "SELECT * FROM student WHERE S_username = @Username AND S_Password = @Password";
+
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.Parameters.AddWithValue("@Username", Username);
                 cmd.Parameters.AddWithValue("@Password", Password);
@@ -40,16 +46,13 @@ namespace StudentEdgeConnect1
 
                     while (reader.Read())
                     {
-                        //Response.Write("<script>alert('" + reader.GetValue(18).ToString() + "');</script>");
-                        //Response.Write("<script>alert('Success');</script>");
-                       
-
+                        
                         Session["S_username"] = reader["S_username"].ToString();
                         Session["Fname"] = reader["Fname"].ToString();
                         Session["role"] = "Student";
                         Response.Redirect("studentprofile.aspx");
                     }
-                    //Response.Redirect("homepage.aspx");
+                    
                 }
                 else
                 {

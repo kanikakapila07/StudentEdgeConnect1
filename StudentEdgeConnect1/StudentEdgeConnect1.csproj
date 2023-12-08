@@ -68,10 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aboutus.aspx" />
-    <Content Include="addjobs.aspx" />
-    <Content Include="applicationstatus.aspx" />
     <Content Include="applyjobs.aspx" />
-    <Content Include="logout.aspx" />
+    <Content Include="images\applications.png" />
     <Content Include="registerevents.aspx" />
     <Content Include="showjobpostings.aspx" />
     <Content Include="bootstrap\css\css\bootstrap.min.css" />
@@ -2158,8 +2156,6 @@
     <Content Include="studentprofile.aspx" />
     <Content Include="studentsignup.aspx" />
     <Content Include="userlogin.aspx" />
-    <Content Include="viewcertifications.aspx" />
-    <Content Include="viewjoblistings.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2170,33 +2166,12 @@
     <Compile Include="aboutus.aspx.designer.cs">
       <DependentUpon>aboutus.aspx</DependentUpon>
     </Compile>
-    <Compile Include="addjobs.aspx.cs">
-      <DependentUpon>addjobs.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="addjobs.aspx.designer.cs">
-      <DependentUpon>addjobs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="applicationstatus.aspx.cs">
-      <DependentUpon>applicationstatus.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="applicationstatus.aspx.designer.cs">
-      <DependentUpon>applicationstatus.aspx</DependentUpon>
-    </Compile>
     <Compile Include="applyjobs.aspx.cs">
       <DependentUpon>applyjobs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="applyjobs.aspx.designer.cs">
       <DependentUpon>applyjobs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="logout.aspx.cs">
-      <DependentUpon>logout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="logout.aspx.designer.cs">
-      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="registerevents.aspx.cs">
       <DependentUpon>registerevents.aspx</DependentUpon>
@@ -2275,20 +2250,6 @@
     </Compile>
     <Compile Include="userlogin.aspx.designer.cs">
       <DependentUpon>userlogin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewcertifications.aspx.cs">
-      <DependentUpon>viewcertifications.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewcertifications.aspx.designer.cs">
-      <DependentUpon>viewcertifications.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewjoblistings.aspx.cs">
-      <DependentUpon>viewjoblistings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewjoblistings.aspx.designer.cs">
-      <DependentUpon>viewjoblistings.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

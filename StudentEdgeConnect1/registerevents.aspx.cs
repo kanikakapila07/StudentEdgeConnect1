@@ -33,37 +33,33 @@ namespace StudentEdgeConnect1
 
                 //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
-                con.Open();
 
                 //open connection
+                con.Open();
+
+                
                 string EventID = TextBox51.Text.Trim();
                 string EventName= TextBox52.Text.Trim();
                 string Description = TextBox2.Text.Trim();
-
                 string Date = TextBox3.Text.Trim();
                 string Time = TextBox4.Text.Trim();
                 string BuildingNo = TextBox54.Text.Trim();
                 string BuildingName = TextBox55.Text.Trim();
-
                 string StreetName = TextBox1.Text.Trim();
-
                 string City = TextBox5.Text.Trim();
                 string ZipCode = TextBox6.Text.Trim();
                 string StudentID = TextBox7.Text.Trim();
 
+                //prepare query
                 string Query = "INSERT INTO registeredevents_table(EventID,EventName,Description,Date,Time,BuildingNo,BuildingName,StreetName,City,ZipCode,StudentID) VALUES('" + EventID + "', '" + EventName + "', '" + Description + "', '" + Date + "', '" + Time + "', '" + BuildingNo + "', '" + BuildingName + "', '" + StreetName + "','" +City + "','"+ZipCode+ "','" + StudentID + "')";
 
-
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
-
-
-
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
-                Response.Write("<script>alert('Success!');</script>");
+                Response.Write("<script>alert('Registered successfully!');</script>");
 
                 GridView1.DataBind();
 
@@ -76,7 +72,7 @@ namespace StudentEdgeConnect1
         }
 
 
-        //go button
+        //go button for searching event 
         protected void LinkButton8_Click(object sender, EventArgs e)
         {
 
@@ -88,12 +84,9 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
+
                 //prepare query
-
-
                 string Query = "SELECT * from registeredevents_table";
-
-
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
@@ -123,12 +116,8 @@ namespace StudentEdgeConnect1
                     Response.Write("<script>alert('Invalid credentials');</script>");
                 }
 
+                //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
-                //Response.Write("<script>alert('Success!');</script>");
-
-
             }
 
 

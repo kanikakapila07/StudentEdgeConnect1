@@ -20,7 +20,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+    <!--this page shows list of posted jobs by employer--> 
       
     <div class="container">
         <div class="card">
@@ -38,39 +38,35 @@
                             <Columns>
                                 
 
-                                 <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
-                  <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />
-                  <asp:BoundField DataField="Requirements" HeaderText="Requirements" SortExpression="Requirements" />
-                  <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                  <asp:BoundField DataField="Pay" HeaderText="Pay" SortExpression="Pay" />
-                  <asp:BoundField DataField="ApplicationDeadline" HeaderText="ApplicationDeadline" SortExpression="ApplicationDeadline" />
-                  <asp:BoundField DataField="EmploymentType" HeaderText="EmploymentType" SortExpression="EmploymentType" />
-                  <asp:BoundField DataField="Benefits" HeaderText="Benefits" SortExpression="Benefits" />
-                  <asp:BoundField DataField="HowToApply" HeaderText="HowToApply" SortExpression="HowToApply" />
-                  <asp:BoundField DataField="SkillName" HeaderText="SkillName" SortExpression="SkillName" />
-                   <asp:BoundField DataField="Company" HeaderText="Company" SortExpression="Company" />
-                  <asp:BoundField DataField="CompanyLocation" HeaderText="CompanyLocation" SortExpression="CompanyLocation" />
-                <asp:TemplateField HeaderText="Apply">
-                <ItemTemplate>
-                <asp:LinkButton ID=Button11 runat="server" Text="Apply" OnClick="Button11_Click"  />
-                </ItemTemplate>
-                </asp:TemplateField>
+                              <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
+                              <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />
+                              <asp:BoundField DataField="Requirements" HeaderText="Requirements" SortExpression="Requirements" />
+                              <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                              <asp:BoundField DataField="Pay" HeaderText="Pay" SortExpression="Pay" />
+                              <asp:BoundField DataField="ApplicationDeadline" HeaderText="ApplicationDeadline" SortExpression="ApplicationDeadline" />
+                              <asp:BoundField DataField="EmploymentType" HeaderText="EmploymentType" SortExpression="EmploymentType" />
+                              <asp:BoundField DataField="Benefits" HeaderText="Benefits" SortExpression="Benefits" />
+                              <asp:BoundField DataField="HowToApply" HeaderText="HowToApply" SortExpression="HowToApply" />
+                              <asp:BoundField DataField="SkillName" HeaderText="SkillName" SortExpression="SkillName" />
+                               <asp:BoundField DataField="Company" HeaderText="Company" SortExpression="Company" />
+                              <asp:BoundField DataField="CompanyLocation" HeaderText="CompanyLocation" SortExpression="CompanyLocation" />
+                               <asp:TemplateField HeaderText="Apply">
+                               <ItemTemplate>
+                               <asp:LinkButton ID=Button11 runat="server" Text="Apply" OnClick="Button11_Click"  />
+                               </ItemTemplate>
+                               </asp:TemplateField>
 
 
-                            </Columns>
-                        </asp:GridView>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <a href="studentprofile.aspx">&lt;&lt;<< Back to previous page</a><br /><br />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <a href="studentprofile.aspx">&lt;&lt; Back</a><br /><br />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-                      
-                           
-                              
-            
-</asp:Content>
+ </asp:Content>

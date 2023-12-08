@@ -18,30 +18,26 @@ namespace StudentEdgeConnect1
             {
                 //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
+
                 //open connection
                 con.Open();
-                //prepare query
+
                 string Username = TextBox1.Text.Trim();
                 string Password = TextBox2.Text.Trim();
-                string Query = "SELECT * FROM employer_table WHERE E_username = @Username AND E_Password = @Password";
 
-                //Response.Write("<script>alert('Success!');</script>");
-                //Response.Redirect("employerprofile.aspx");
+                //prepare query
+                string Query = "SELECT * FROM employer_table WHERE E_username = @Username AND E_Password = @Password";
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.Parameters.AddWithValue("@Username", Username);
                 cmd.Parameters.AddWithValue("@Password", Password);
                 SqlDataReader reader = cmd.ExecuteReader();
-                //int count = (int)cmd.ExecuteScalar();
                 if (reader.HasRows)
                 {
 
                     while (reader.Read())
                     {
-                        // Response.Write("<script>alert('"+reader.GetValue(15).ToString()+"');</script>");
-
-                      
                        
                         Session["E_username"] = reader["E_username"].ToString();
                         Session["Fname"] = reader["Fname"].ToString();

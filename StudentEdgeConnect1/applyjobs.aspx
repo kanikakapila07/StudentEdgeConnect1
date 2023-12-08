@@ -25,7 +25,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!--goes to this page after clicking apply on show job postings and adds following info-->
+   <!--goes to this page after clicking apply on show job postings and adds following info-->
 
        <div class="scroll-container">
         <div class="row">
@@ -151,28 +151,24 @@
                         </div>
                         <div class="row">
                            <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>"
-    SelectCommand="SELECT * FROM [appliedjobs_table] WHERE StudentID = @StudentID">
-    <SelectParameters>
-        <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
-    </SelectParameters>
-</asp:SqlDataSource>
+                             SelectCommand="SELECT * FROM [appliedjobs_table] WHERE StudentID = @StudentID">
+                            <SelectParameters>
+                                <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
+                            </SelectParameters>
+                            </asp:SqlDataSource>
                             <div class="col">
                               
                                 <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False"  DataKeyNames="StudentID"  DataSourceID="SqlDataSource"   >
                                     <Columns>
                                         <asp:BoundField DataField="JobID" HeaderText="JobID" ReadOnly="true" SortExpression="JobID" />
                                         <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />
-                                         <asp:BoundField DataField="Company" HeaderText="Company" SortExpression="Company" />
-                                         <asp:BoundField DataField="CompanyLocation" HeaderText="CompanyLocation" SortExpression="CompanyLocation" />
-
+                                        <asp:BoundField DataField="Company" HeaderText="Company" SortExpression="Company" />
+                                        <asp:BoundField DataField="CompanyLocation" HeaderText="CompanyLocation" SortExpression="CompanyLocation" />
                                         <asp:BoundField DataField="EducationLevel" HeaderText="EducationLevel" SortExpression="EducationLevel" />
                                         <asp:BoundField DataField="UniversityName" HeaderText="UniversityName" SortExpression="UniversityName" />
-                                     
                                         <asp:BoundField DataField="GraduationDate" HeaderText="GraduationDate" SortExpression="GraduationDate" />
                                         <asp:BoundField DataField="StudentID" HeaderText="StudentID" SortExpression="StudentID" />
                                        
-                                        
-                                        
                                     </Columns>
                                 </asp:GridView>
                             </div>

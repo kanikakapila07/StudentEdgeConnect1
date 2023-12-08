@@ -21,8 +21,6 @@ namespace StudentEdgeConnect1
             {
                 string S_username = Session["S_username"] as string;
 
-
-
                 string currentTab = "edit-profile";
                 if (currentTab == "edit-profile")
                 {
@@ -67,44 +65,49 @@ namespace StudentEdgeConnect1
 
             if (!string.IsNullOrEmpty(S_username))
             {
-                // Filter and bind the GridView with applied jobs specific to the current user
-                BindAppliedJobs(S_username);
+                
+                ViewStatus(S_username);
             }
-            //status
+            
             GridView3.DataBind();
         }
         protected void LoadApplyJobs()
         {
             GridView1.DataBind();
         }
-        //status
-        private void BindAppliedJobs(string S_username)
+        
+        //view application status
+        private void ViewStatus(string S_username)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    con.Open();
-
-                    string query = "SELECT s.JobID, s.StudentID, s.ApplicationStatus " +
+                //establish connection
+                SqlConnection con = new SqlConnection(ConnectionString);
+                
+                //open connection
+                con.Open();
+                
+                //prepare query
+                string query = "SELECT s.JobID, s.StudentID, s.ApplicationStatus " +
                                    "FROM Status s " +
                                    "INNER JOIN student u ON s.StudentID = u.StudentID " +
                                    "WHERE u.S_username = @S_username";
 
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@S_username", S_username);
+                //execute query
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@S_username", S_username);
 
-                    DataTable table = new DataTable();
-                    table.Load(cmd.ExecuteReader());
+                DataTable table = new DataTable();
+                table.Load(cmd.ExecuteReader());
+                GridView3.DataSource = table;
+                GridView3.DataBind();
 
-                    // Bind the DataTable to the GridView
-                    GridView3.DataSource = table;
-                    GridView3.DataBind();
-                }
+                //close connection
+                con.Close();
             }
             catch (Exception exception)
             {
-                // Handle exceptions as needed
+               
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
         }
@@ -142,34 +145,31 @@ namespace StudentEdgeConnect1
             Response.Redirect("registerevents.aspx");
 
         }
-        //withdraw 
+
+        //withdraw application
         protected void Button16_Click(object sender, EventArgs e)
         {
             try
             {
                 LinkButton btn = (LinkButton)sender;
-
-                // Get the selected row of the GridView
                 GridViewRow row = (GridViewRow)btn.NamingContainer;
-
-                // Get the JobID value from the GridView's selected row
                 string JobID = GridView3.DataKeys[row.RowIndex]["JobID"].ToString();
+
                 //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
 
                 //open connection
                 con.Open();
-                //prepare query
 
+                //prepare query
                 string Query = "DELETE FROM appliedjobs_table WHERE JobID ='" + JobID + "'";
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
                 Response.Write("<script>alert('Withdrawn!');</script>");
 
 
@@ -181,6 +181,8 @@ namespace StudentEdgeConnect1
             }
 
         }
+
+        //add certification links 
         void addLink()
         {
             try
@@ -191,23 +193,20 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+   
                 string Link = TextBox6.Text.Trim();
 
-
+                //prepare query
                 string Query = "INSERT INTO certifications(Link) VALUES('" + Link + "')";
-
-
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
                 Response.Write("<script>alert('Added Successfully!');</script>");
-                //clear();
                 GridView6.DataBind();
 
             }

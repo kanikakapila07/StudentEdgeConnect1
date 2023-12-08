@@ -11,6 +11,8 @@ namespace StudentEdgeConnect1
     public partial class studentsignup : System.Web.UI.Page
     {
         string ConnectionString = "Data Source=DESKTOP-8DP7DQP\\SQLEXPRESS;Initial Catalog=studentEdgeConnect1DB;Integrated Security=True";
+        string AnotherConnectionString = "Data Source=DESKTOP-8DP7DQP\\SQLEXPRESS;Initial Catalog=studentEdgeConnect1DB;Integrated Security=True;providerName=System.Data.SqlClient";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -28,41 +30,43 @@ namespace StudentEdgeConnect1
                 register();
             }
         }
+
         //check if user exists
-
-
         bool checkExists()
         {
             try
             {
+                //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
+
+                //open connection
                 con.Open();
 
                 string SSN = TextBox6.Text.Trim();
+
+                //prepare query
                 string Query = "(SELECT COUNT(*) student WHERE SSN='" + SSN + "')";
 
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
-
                 cmd.Parameters.AddWithValue("@SSN", SSN);
                 int count = (int)cmd.ExecuteScalar();
                 if (count > 0)
                 {
-
+                    //close connection and user exists
                     con.Close();
                     return true;
 
                 }
                 else
                 {
+                    //close connection and user doesnt exist
                     con.Close();
                     return false;
 
                 }
 
             }
-
-
-
 
             catch (Exception exception)
             {
@@ -82,7 +86,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
                 string Fname = TextBox1.Text.Trim();
                 string Mname = TextBox2.Text.Trim();
                 string Lname = TextBox3.Text.Trim();
@@ -104,15 +108,15 @@ namespace StudentEdgeConnect1
                 string S_Password = TextBox17.Text.Trim();
 
 
-
+                //prepare query
                 string Query = "INSERT INTO student(Fname, Mname, Lname, roleType, roleDescription, SSN, EmailID, BirthDate, Phone, ZipCode, City, State, Country, StudentID, EducationLevel,UniversityName,GraduationDate,S_username, S_Password) VALUES('" + Fname + "', '" + Mname + "', '" + Lname + "', '" + roleType + "', '" + roleDescription + "', '" + SSN + "', '" + EmailID + "', '" + BirthDate + "', '" + Phone + "', '" + ZipCode + "', '" + City + "', '" + State + "', '" + Country + "', '" + StudentID + "', '" + EducationLevel + "', '" + UniversityName + "', '" + GraduationDate + "' ,'" + S_username + "','" + S_Password + "')";
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
                 Response.Write("<script>alert('Registered Successfully!');</script>");
 
 

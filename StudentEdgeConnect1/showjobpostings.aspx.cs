@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace StudentEdgeConnect1
-{   //shows lists of jobs posted
+{  
     public partial class applyjobs_enterinfo : System.Web.UI.Page
     {
 

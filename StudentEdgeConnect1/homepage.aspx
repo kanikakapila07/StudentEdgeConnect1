@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!-- Your content -->
+   <!--Heading--> 
     <section style="height: 120vh; background-image: url('images/studentedgeconnecthome.png'); background-size: cover; background-position: center; position: relative;">
         <div style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); color:#e0b0ff; font-size: 2em; font-style:italic; font-weight: bold; text-align: center;">
             What We Offer

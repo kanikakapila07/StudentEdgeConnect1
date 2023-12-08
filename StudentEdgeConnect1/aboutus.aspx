@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="aboutus.aspx.cs" Inherits="StudentEdgeConnect1.aboutus" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <style>
-        /* Styles for the About Us page */
+        
         body {
-            background-color:#d8bced; /* Lavender background */
-            color: black; /* Black text */
+            background-color:#d8bced; 
+            color: black; 
             font-family: s'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
            
         }
@@ -31,8 +31,6 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <!-- Content for the About Us page -->
     <h1 >About Us</h1>
     <div class="content" >
         <p> 

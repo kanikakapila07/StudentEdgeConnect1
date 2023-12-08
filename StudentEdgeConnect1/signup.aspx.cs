@@ -12,9 +12,9 @@ namespace StudentEdgeConnect1
 {
     public partial class signup : System.Web.UI.Page
     {
-        //address of sql server
-        //string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-        string ConnectionString = "Data Source=DESKTOP-8DP7DQP\\SQLEXPRESS;Initial Catalog=studentEdgeConnectDB;Integrated Security=True";
+
+        string ConnectionString = "Data Source=DESKTOP-8DP7DQP\\SQLEXPRESS;Initial Catalog=studentEdgeConnect1DB;Integrated Security=True";
+        string AnotherConnectionString = "Data Source=DESKTOP-8DP7DQP\\SQLEXPRESS;Initial Catalog=studentEdgeConnect1DB;Integrated Security=True;providerName=System.Data.SqlClient";
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,33 +41,38 @@ namespace StudentEdgeConnect1
         {
             try
             {
+                //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
+
+                //open connection
                 con.Open();
 
                 string SSN = TextBox6.Text.Trim();
+
+                //prepare query
                 string Query = "(SELECT COUNT(*) FROM employer_table WHERE SSN='" + SSN + "')";
 
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
-
                 cmd.Parameters.AddWithValue("@SSN", SSN);
+
                 int count = (int)cmd.ExecuteScalar();
                 if (count > 0)
                 {
-
+                    //close connection and user exists 
                     con.Close();
                     return true;
 
                 }
                 else
                 {
+                    //close connection and user doesnt exist
                     con.Close();
                     return false;
 
                 }
 
             }
-
-
 
 
             catch (Exception exception)
@@ -88,7 +93,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
                 string Fname = TextBox1.Text.Trim();
                 string Mname = TextBox2.Text.Trim();
                 string Lname = TextBox3.Text.Trim();
@@ -107,16 +112,15 @@ namespace StudentEdgeConnect1
                 string E_username = TextBox16.Text.Trim();
                 string E_Password = TextBox17.Text.Trim();
 
-
-
+                //prepare query
                 string Query = "INSERT INTO employer_table(Fname, Mname, Lname, roleType, roleDescription, SSN, EmailID, BirthDate, Phone, ZipCode, City, State, Country, EmployerID, E_CompanyID, E_username, E_Password) VALUES('" + Fname + "', '" + Mname + "', '" + Lname + "', '" + roleType + "', '" + roleDescription + "', '" + SSN + "', '" + EmailID + "', '" + BirthDate + "', '" + Phone + "', '" + ZipCode + "', '" + City + "', '" + State + "', '" + Country + "', '" + EmployerID + "', '" + E_CompanyID + "', '" + E_username + "','" + E_Password + "')";
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
                 Response.Write("<script>alert('Registered Successfully!');</script>");
 
 
