@@ -48,10 +48,16 @@ namespace StudentEdgeConnect1
             {
                 string username = Session["E_username"] as string;
 
-                // Connect to the database and fetch user details
+               //establish connection
                 SqlConnection con = new SqlConnection(ConnectionString);
+
+                //open connection
                 con.Open();
+
+                //prepare query
                 string query = "SELECT SSN, E_password, Fname, Mname, Lname, BirthDate, EmailID, Phoneno, City, State, Country, ZipCode, E_username FROM employer_table WHERE E_username = @Username";
+                
+                //exceute query
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@Username", username);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -77,7 +83,7 @@ namespace StudentEdgeConnect1
                 }
                 con.Close();
 
-                Button8.Click += Button8_Click; // Attach the updateUserInfo method to the Button8 Click event
+                Button8.Click += Button8_Click; 
             }
             catch (Exception ex)
             {
@@ -116,12 +122,13 @@ namespace StudentEdgeConnect1
             }
         }
 
+        //update employer info
         protected void Button8_Click(object sender, EventArgs e)
         {
             try
             {
-                string ssn = TextBox13.Text.Trim(); // Fetching SSN from the TextBox
-                string newpassword = TextBox43.Text.Trim(); // New password to update
+                string ssn = TextBox13.Text.Trim(); 
+                string newpassword = TextBox43.Text.Trim(); 
                 string fname = TextBox4.Text.Trim();
                 string mname = TextBox5.Text.Trim();
                 string lname = TextBox7.Text.Trim();
@@ -136,18 +143,18 @@ namespace StudentEdgeConnect1
                 
 
 
-                // Connection establishment
+               
                 SqlConnection con = new SqlConnection(ConnectionString);
                 con.Open();
 
-                // SQL Update Query
+              
                 string query = "UPDATE employer_table SET E_password = @NewPassword, Fname = @Fname, Mname = @Mname, Lname = @Lname, BirthDate = @BirthDate, EmailID = @Email, Phone = @Phone, City = @City, State = @State, Country = @Country, ZipCode = @ZipCode, E_username = @Username WHERE SSN = @SSN";
 
 
-                // SQL Command creation
+              
                 SqlCommand cmd = new SqlCommand(query, con);
 
-                // Adding parameters to prevent SQL Injection
+                
                 cmd.Parameters.AddWithValue("@NewPassword", newpassword);
                 cmd.Parameters.AddWithValue("@Fname", fname);
                 cmd.Parameters.AddWithValue("@Mname", mname);
@@ -162,29 +169,30 @@ namespace StudentEdgeConnect1
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@SSN", ssn);
 
-                // Executing the query
+               
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 con.Close();
 
                 if (rowsAffected > 0)
                 {
-                    // If the update was successful
+                   
                     Response.Write("<script>alert('Updated successfully!');</script>");
                 }
                 else
                 {
-                    // If no rows were affected (no matching SSN found)
-                    Response.Write("<script>alert('No employer found with the provided SSN.');</script>");
+                   
+                    Response.Write("<script>alert('No employer found ');</script>");
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions, if any
+                
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
 
+        //update event 
         protected void Button5_Click(object sender, EventArgs e)
         {
             if (checkEventExists())
@@ -196,7 +204,7 @@ namespace StudentEdgeConnect1
             else
             {
 
-                Response.Write("<script>alert('Job with this ID doesn't exist!');</script>");
+                Response.Write("<script>alert('Event with this ID doesn't exist!');</script>");
             }
         }
 
@@ -216,6 +224,8 @@ namespace StudentEdgeConnect1
             }
         }
 
+
+        //add new event
         protected void Button4_Click(object sender, EventArgs e)
         {
             if (checkEventExists())
@@ -241,14 +251,19 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+              
                 string JobID = TextBox39.Text.Trim();
                 string StudentID = TextBox34.Text.Trim();
+
+                //prepare query
                 string Query = "INSERT INTO Status(JobID, StudentID, ApplicationStatus) VALUES('" + JobID + "', '" + StudentID + "','Accepted')";
 
-
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
+                //close connection
                 con.Close();
                 Response.Write("<script>alert('Accepted!');</script>");
 
@@ -273,14 +288,19 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+               
                 string JobID = TextBox39.Text.Trim();
                 string StudentID = TextBox34.Text.Trim();
+
+                //prepare query
                 string Query = "INSERT INTO Status(JobID, StudentID, ApplicationStatus) VALUES('" + JobID + "', '" + StudentID + "','Rejected')";
 
-
+                //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
+                //close connection
                 con.Close();
                 Response.Write("<script>alert('Rejected!');</script>");
             }
@@ -305,11 +325,12 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+               
 
                 string JobID = TextBox39.Text.Trim();
                 string StudentID = TextBox34.Text.Trim();
 
+                //prepare query
                 string Query = "SELECT s.fname, s.mname, s.lname, s.StudentID, s.EmailID, " +
                     "a.EducationLevel, a.UniversityName, a.GraduationDate, a.JobID, a.JobPosition, a.Company " +
                     "FROM student s " +
@@ -347,10 +368,7 @@ namespace StudentEdgeConnect1
                 }
 
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
-                //Response.Write("<script>alert('Success!');</script>");
-
+              
 
             }
 
@@ -385,11 +403,12 @@ namespace StudentEdgeConnect1
             }
             else
             {
-                Response.Write("<script>alert('Job with this ID doesn't exist!');</script>");
+                Response.Write("<script>alert('Event with this ID doesn't exist!');</script>");
             }
 
         }
 
+        //check if job exists 
         bool checkExists()
         {
             try
@@ -426,6 +445,7 @@ namespace StudentEdgeConnect1
             return false;
         }
 
+        //check if event exists
         bool checkEventExists()
         {
             try
@@ -462,7 +482,7 @@ namespace StudentEdgeConnect1
             return false;
         }
 
-        //new job 
+        //add new job 
         void addNewJob()
         {
             try
@@ -473,7 +493,8 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+               
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
                 string Requirements = DropDownList2.SelectedItem.Value;
@@ -487,6 +508,7 @@ namespace StudentEdgeConnect1
                 string Company = TextBox11.Text.Trim();
                 string CompanyLocation = TextBox12.Text.Trim();
 
+                //prepare query
                 string Query = "INSERT INTO jobs_table(JobID,JobPosition,Requirements,Description,Pay,ApplicationDeadline,EmploymentType,Benefits,HowToApply,SkillName,Company,CompanyLocation) VALUES('" + JobID + "', '" + JobPosition + "', '" + Requirements + "', '" + Description + "', '" + Pay + "', '" + ApplicationDeadline + "', '" + EmploymentType + "', '" + Benefits + "', '" + HowToApply + "', '" + SkillName + "', '" + Company + "','" + CompanyLocation + "')";
 
 
@@ -494,10 +516,10 @@ namespace StudentEdgeConnect1
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
+               
                 Response.Write("<script>alert('Added Successfully!');</script>");
                 clear();
                 GridView1.DataBind();
@@ -509,6 +531,8 @@ namespace StudentEdgeConnect1
             }
 
         }
+
+        //add new event
         void addNewEvent()
         {
             try
@@ -519,33 +543,31 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+              
                 string EventID = TextBox25.Text.Trim();
                 string EventName = TextBox21.Text.Trim();
-
                 string Description = TextBox22.Text.Trim();
                 string Date = TextBox23.Text.Trim();
                 string Time = TextBox24.Text.Trim();
-
                 string BuildingNo = TextBox26.Text.Trim();
                 string BuildingName = TextBox27.Text.Trim();
                 string StreetName = TextBox28.Text.Trim();
                 string City = TextBox29.Text.Trim();
                 string ZipCode = TextBox30.Text.Trim();
 
+                //prepare query
                 string Query = "INSERT INTO events_table(EventID,EventName,Description,Date,Time,BuildingNo,BuildingName,StreetName,City,ZipCode) VALUES('" + EventID + "', '" + EventName + "', '" + Description + "', '" + Date + "', '" + Time + "', '" + BuildingNo + "', '" + BuildingName + "', '" + StreetName + "', '" + City + "', '" + ZipCode + "')";
-
-
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
+               
                 Response.Write("<script>alert('Added Successfully!');</script>");
-                //clear();
+               
                 GridView2.DataBind();
 
             }
@@ -556,6 +578,7 @@ namespace StudentEdgeConnect1
 
         }
 
+        //update job info
         void updateJobInfo()
         {
 
@@ -567,7 +590,8 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+
+          
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
                 string Requirements = DropDownList2.SelectedItem.Value;
@@ -582,18 +606,17 @@ namespace StudentEdgeConnect1
                 string CompanyLocation = TextBox12.Text.Trim();
 
 
-
+                //prepare query
                 string Query = "UPDATE jobs_table SET JobPosition = '" + JobPosition + "', Pay = '" + Pay + "', ApplicationDeadline = '" + ApplicationDeadline + "', Requirements = '" + Requirements + "', EmploymentType = '" + EmploymentType + "', Benefits = '" + Benefits + "', Description = '" + Description + "', HowToApply = '" + HowToApply + "', SkillName = '" + SkillName + "', Company = '" + Company + "', CompanyLocation = '" + CompanyLocation + "' WHERE JobID = '" + JobID + "'";
 
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
-
+                
                 Response.Write("<script>alert('Updated Successfully');</script>");
                 clear();
                 GridView1.DataBind();
@@ -603,6 +626,8 @@ namespace StudentEdgeConnect1
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
         }
+
+        //update event info
         void updateEventInfo()
         {
 
@@ -614,36 +639,30 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+               
                 string EventID = TextBox25.Text.Trim();
                 string EventName = TextBox21.Text.Trim();
-
                 string Description = TextBox22.Text.Trim();
                 string Date = TextBox23.Text.Trim();
                 string Time = TextBox24.Text.Trim();
-
                 string BuildingNo = TextBox26.Text.Trim();
                 string BuildingName = TextBox27.Text.Trim();
                 string StreetName = TextBox28.Text.Trim();
                 string City = TextBox29.Text.Trim();
                 string ZipCode = TextBox30.Text.Trim();
 
-
-
-
+                //prepare query
                 string Query = "UPDATE events_table SET EventID = '" + EventID + "', EventName = '" + EventName + "', Description = '" + Description + "', Date = '" + Date + "', Time = '" + Time + "', BuildingNo = '" + BuildingNo + "', BuildingName = '" + BuildingName + "', StreetName = '" + StreetName + "', City = '" + City + "', ZipCode = '" + ZipCode + "' WHERE EventID = '" + EventID + "'";
-
 
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
-
+                
                 Response.Write("<script>alert('Updated Successfully');</script>");
-                //clear();
+
                 GridView2.DataBind();
             }
             catch (Exception exception)
@@ -652,6 +671,8 @@ namespace StudentEdgeConnect1
             }
         }
 
+
+        //delete job
         void deleteJob()
         {
             try
@@ -662,7 +683,7 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+               
                 string JobID = TextBox1.Text.Trim();
                 string JobPosition = TextBox2.Text.Trim();
                 string Requirements = DropDownList2.SelectedItem.Value;
@@ -677,15 +698,15 @@ namespace StudentEdgeConnect1
                 string CompanyLocation = TextBox12.Text.Trim();
 
 
-
+                //prepare query
                 string Query = "DELETE FROM jobs_table WHERE JobID = '" + JobID + "'";
+
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
                 Response.Write("<script>alert('Deleted Successfully');</script>");
                 clear();
                 GridView1.DataBind();
@@ -696,6 +717,8 @@ namespace StudentEdgeConnect1
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
         }
+
+        //delete event
         void deleteEvent()
         {
             try
@@ -706,31 +729,30 @@ namespace StudentEdgeConnect1
 
                 //open connection
                 con.Open();
-                //prepare query
+              
                 string EventID = TextBox25.Text.Trim();
                 string EventName = TextBox21.Text.Trim();
-
                 string Description = TextBox22.Text.Trim();
                 string Date = TextBox23.Text.Trim();
                 string Time = TextBox24.Text.Trim();
-
                 string BuildingNo = TextBox26.Text.Trim();
                 string BuildingName = TextBox27.Text.Trim();
                 string StreetName = TextBox28.Text.Trim();
                 string City = TextBox29.Text.Trim();
                 string ZipCode = TextBox30.Text.Trim();
 
-
+                //prepare query
                 string Query = "DELETE FROM events_table WHERE EventID = '" + EventID + "'";
+
                 //execute query
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.ExecuteNonQuery();
+
                 //close connection
                 con.Close();
-                //MessageBox.Show("User registered successfully!");
-                // Response.Write("<script>alert('Registered Successfully!');</script>");
+               
                 Response.Write("<script>alert('Deleted Successfully');</script>");
-                //clear();
+             
                 GridView2.DataBind();
 
             }

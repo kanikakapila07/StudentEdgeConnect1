@@ -13,7 +13,8 @@
         }
     </style>
    
-
+    
+    
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -109,21 +110,21 @@
                                 </div>
                                 <!-- Education Level -->
                                 <div class="form-group row">
-                                    <label for="zip" class="col-sm-4 col-form-label text-left">ZIP Code:</label>
+                                    <label for="zip" class="col-sm-4 col-form-label text-left">Education Level:</label>
                                     <div class="col-sm-8">
                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"  placeholder="EducationLevel"></asp:TextBox>
                                 </div>
                                 </div>
                                 <!-- University Name -->
                                 <div class="form-group row">
-                                    <label for="zip" class="col-sm-4 col-form-label text-left">ZIP Code:</label>
+                                    <label for="zip" class="col-sm-4 col-form-label text-left">University Name:</label>
                                     <div class="col-sm-8">
                                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control"  placeholder="UniversityName"></asp:TextBox>
                                 </div>
                                 </div>
                                 <!-- Graduation Date -->
                                 <div class="form-group row">
-                                    <label for="zip" class="col-sm-4 col-form-label text-left">ZIP Code:</label>
+                                    <label for="zip" class="col-sm-4 col-form-label text-left">Graduation Date:</label>
                                     <div class="col-sm-8">
                                        <asp:TextBox ID="TextBox3" runat="server" CssClass="form-control" TextMode="Date"  placeholder="GraduationDate"></asp:TextBox>
                                 </div>
@@ -229,7 +230,7 @@
                                             <Columns>
                                 
 
-                                                             <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
+                                              <asp:BoundField DataField="JobID" HeaderText="JobID" SortExpression="JobID" />
                                               <asp:BoundField DataField="JobPosition" HeaderText="JobPosition" SortExpression="JobPosition" />
                                               <asp:BoundField DataField="Requirements" HeaderText="Requirements" SortExpression="Requirements" />
                                               <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
@@ -307,7 +308,7 @@
      </div>
               <div class="tab-pane fade" id="registered-events" role="tabpanel">
                             <!-- Content for Registered Networking Events Tab -->
-                        <div class="scroll-container">
+                        <div class="scroll container">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -368,7 +369,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <center>
-                                                <img width="100px" src="images/certificate.png" />
+                                                <img width="100px" src="images/certification.jpg" />
                                             </center>
                                         </div>
                                     </div>

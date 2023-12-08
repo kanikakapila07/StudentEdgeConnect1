@@ -174,7 +174,7 @@
                                 </div>
                             </div>
 
-
+                                <!--Update button-->
                               
                                 <div class="form-group">
                                         <asp:Button class="btn btn-success btn-block" ID="Button8" runat="server" Text="Update" OnClick="Button8_Click" />

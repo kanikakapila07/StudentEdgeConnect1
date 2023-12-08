@@ -70,6 +70,7 @@
     <Content Include="aboutus.aspx" />
     <Content Include="applyjobs.aspx" />
     <Content Include="images\applications.png" />
+    <Content Include="images\certification.jpg" />
     <Content Include="registerevents.aspx" />
     <Content Include="showjobpostings.aspx" />
     <Content Include="bootstrap\css\css\bootstrap.min.css" />
@@ -2145,7 +2146,6 @@
     <Content Include="fontawesome\Fontawesome\svgs\solid\z.svg" />
     <Content Include="homepage.aspx" />
     <Content Include="images\adminlogin.jpg" />
-    <Content Include="images\certificate.jpg" />
     <Content Include="images\jobportal.png" />
     <Content Include="images\jobs.png" />
     <Content Include="images\networking.jpg" />

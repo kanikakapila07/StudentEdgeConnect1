@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-      $(document).ready(function () {
-          $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
-      });
+        $(document).ready(function () {
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+        });
     </script>
      <script>
          $(document).ready(function () {
@@ -22,7 +22,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!--this page shows list of posted jobs by employer--> 
       
-    <div class="container">
+    <div class="scroll container">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -69,4 +69,5 @@
                         </div>
                     </div>
                 </div>
+    
  </asp:Content>

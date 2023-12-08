@@ -60,46 +60,39 @@
                         
                            
                         <li class="nav-item active">
-        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="nav-link" OnClick="LinkButton2_Click">Sign Up</asp:LinkButton>
-                            </li>
-    <li class="nav-item active">
-        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="nav-link" OnClick="LinkButton1_Click">Student Login</asp:LinkButton>
-    </li>
+                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="nav-link" OnClick="LinkButton2_Click">Sign Up</asp:LinkButton>
+                                                </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="nav-link" OnClick="LinkButton1_Click">Student Login</asp:LinkButton>
+                        </li>
                      
     
- <li class="nav-item active">
-        <asp:LinkButton ID="LinkButton4" runat="server" CssClass="nav-link" OnClick="LinkButton4_Click" >Employer Login</asp:LinkButton>
-    </li>
-                        <li class="nav-item active">
-        <asp:LinkButton ID="LinkButton3" runat="server" CssClass="nav-link" OnClick="LinkButton3_Click" >LogOut</asp:LinkButton>
-    </li>
-                       <li class="nav-item active">
-        <asp:LinkButton ID="LinkButton5" runat="server" CssClass="nav-link" OnClick="LinkButton5_Click" >Hello User</asp:LinkButton>
-    </li>
-   
-   
-    
-     
+                     <li class="nav-item active">
+                            <asp:LinkButton ID="LinkButton4" runat="server" CssClass="nav-link" OnClick="LinkButton4_Click" >Employer Login</asp:LinkButton>
+                        </li>
+                                            <li class="nav-item active">
+                            <asp:LinkButton ID="LinkButton3" runat="server" CssClass="nav-link" OnClick="LinkButton3_Click" >LogOut</asp:LinkButton>
+                        </li>
+                                           <li class="nav-item active">
+                            <asp:LinkButton ID="LinkButton5" runat="server" CssClass="nav-link" OnClick="LinkButton5_Click" >Hello User</asp:LinkButton>
+                        </li>
 
                         </ul>
                     </div>
-     
             </nav>
         </div>
-        <!--Main Content Placeholder-header-->
+        <!--header-->
         <div>
             <asp:ContentPlaceHolder ID ="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        <!--Main Content Placeholder-footer-->
+        <!--footer-->
         <footer>
            <div id="footer1" class="container-fluid">
                <div class="row">
                    <div class="col-xs-12 col-sm-12 text-center">
 
                        <p>
-                          
-                           
                            &nbsp; &copy All Rights Reserved. 
                            <a class="footerlinks" href="#" target="_blank"></a>
                            

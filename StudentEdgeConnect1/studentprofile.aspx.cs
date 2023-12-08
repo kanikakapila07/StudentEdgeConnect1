@@ -60,7 +60,7 @@ namespace StudentEdgeConnect1
             {
                 string username = Session["S_username"] as string;
 
-                // Connect to the database and fetch user details
+               
                 SqlConnection con = new SqlConnection(ConnectionString);
                 con.Open();
                 string query = "SELECT SSN, S_password, Fname, Mname, Lname, BirthDate, EmailID, Phoneno, City, State, Country, ZipCode,EducationLevel, UniversityName,GraduationDate, S_username FROM student WHERE S_username = @Username";
@@ -92,19 +92,21 @@ namespace StudentEdgeConnect1
                 }
                 con.Close();
 
-                Button8.Click += Button8_Click; // Attach the updateUserInfo method to the Button8 Click event
+                Button8.Click += Button8_Click; 
             }
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
+        //update student info
         protected void Button8_Click(object sender, EventArgs e)
         {
             try
             {
-                string ssn = TextBox13.Text.Trim(); // Fetching SSN from the TextBox
-                string newpassword = TextBox43.Text.Trim(); // New password to update
+                string ssn = TextBox13.Text.Trim();
+                string newpassword = TextBox43.Text.Trim(); 
                 string fname = TextBox4.Text.Trim();
                 string mname = TextBox5.Text.Trim();
                 string lname = TextBox7.Text.Trim();
@@ -121,20 +123,14 @@ namespace StudentEdgeConnect1
                 string graduationDate = TextBox20.Text.Trim();
 
 
-
-
-                // Connection establishment
                 SqlConnection con = new SqlConnection(ConnectionString);
                 con.Open();
 
-                // SQL Update Query
                 string query = "UPDATE student SET S_password = @NewPassword, Fname = @Fname, Mname = @Mname, Lname = @Lname, BirthDate = @BirthDate, EmailID = @Email, Phone = @Phone, City = @City, State = @State, Country = @Country, ZipCode = @ZipCode, GraduationDate= @GraduationDate, EducationLevel=@EducationLevel, UniversityName=@UniversityName, S_username = @Username WHERE SSN = @SSN";
 
-
-                // SQL Command creation
                 SqlCommand cmd = new SqlCommand(query, con);
 
-                // Adding parameters to prevent SQL Injection
+               
                 cmd.Parameters.AddWithValue("@NewPassword", newpassword);
                 cmd.Parameters.AddWithValue("@Fname", fname);
                 cmd.Parameters.AddWithValue("@Mname", mname);
@@ -153,25 +149,24 @@ namespace StudentEdgeConnect1
                 cmd.Parameters.AddWithValue("@SSN", ssn);
             
 
-                // Executing the query
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 con.Close();
 
                 if (rowsAffected > 0)
                 {
-                    // If the update was successful
+                    
                     Response.Write("<script>alert('Updated successfully!');</script>");
                 }
                 else
                 {
-                    // If no rows were affected (no matching SSN found)
+                    
                     Response.Write("<script>alert('No employer found with the provided SSN.');</script>");
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions, if any
+                
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }

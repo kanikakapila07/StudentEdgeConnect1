@@ -152,7 +152,7 @@
                     </div>
                 </div>
 
-                    <a href="registerevents.aspx">&lt;&lt; Back</a><br><br>
+                    <a href="studentprofile.aspx">&lt;&lt; Back</a><br><br>
                 </div>
                 <div class="col-md-7" >
                     <div class="card" >
@@ -170,12 +170,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                              <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT * FROM [registeredevents_table]">
+                              <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:studentEdgeConnect1DBConnectionString %>" SelectCommand="SELECT * FROM [registeredevents_table] WHERE StudentID = @StudentID">
+                                  <SelectParameters> 
+                                      <asp:Parameter Name="StudentID" Type="String" DefaultValue="" />
+                                  </SelectParameters>
 
                             </asp:SqlDataSource>
                                 <div class="col">
                               
-                                    <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False"  DataKeyNames="EventID" DataSourceID="SqlDataSource" >
+                                    <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False"  DataKeyNames="StudentID" DataSourceID="SqlDataSource" >
                                         <Columns>
                                             <asp:BoundField DataField="EventID" HeaderText="EventID" ReadOnly="true" SortExpression="ID" />
                                             <asp:BoundField DataField="EventName" HeaderText="EventName" SortExpression="EventName" />

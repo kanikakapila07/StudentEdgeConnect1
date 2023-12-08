@@ -16,8 +16,59 @@ namespace StudentEdgeConnect1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GridView1.DataBind();
+            if (!IsPostBack)
+            {
+                if (Session["S_username"] != null)
+                {
+                    string studentID = RetrieveStudentID();
+                    SqlDataSource.SelectParameters["StudentID"].DefaultValue = studentID;
+
+                    GridView1.DataBind();
+                }
+            }
         }
+
+        //retreive student id of logged in student
+        private string RetrieveStudentID()
+        {
+            string StudentUsername = Session["S_username"].ToString();
+            string studentID = "";
+
+            try
+            {
+                //establish connection
+                SqlConnection con = new SqlConnection(ConnectionString);
+
+                //open connection
+                con.Open();
+
+                //prepare query
+                string query = "SELECT StudentID FROM student WHERE S_username = @S_username";
+
+                //execute query
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@S_username", StudentUsername);
+
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    studentID = result.ToString();
+                }
+                else
+                {
+                    Response.Write("<script>alert('No data found');</script>");
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
+            }
+
+            return studentID;
+        }
+
+
         protected void Button2_Click(object sender, EventArgs e)
         {
             register();
@@ -31,15 +82,8 @@ namespace StudentEdgeConnect1
             try
             {
 
-                //establish connection
-                SqlConnection con = new SqlConnection(ConnectionString);
-
-                //open connection
-                con.Open();
-
-                
                 string EventID = TextBox51.Text.Trim();
-                string EventName= TextBox52.Text.Trim();
+                string EventName = TextBox52.Text.Trim();
                 string Description = TextBox2.Text.Trim();
                 string Date = TextBox3.Text.Trim();
                 string Time = TextBox4.Text.Trim();
@@ -50,26 +94,59 @@ namespace StudentEdgeConnect1
                 string ZipCode = TextBox6.Text.Trim();
                 string StudentID = TextBox7.Text.Trim();
 
-                //prepare query
-                string Query = "INSERT INTO registeredevents_table(EventID,EventName,Description,Date,Time,BuildingNo,BuildingName,StreetName,City,ZipCode,StudentID) VALUES('" + EventID + "', '" + EventName + "', '" + Description + "', '" + Date + "', '" + Time + "', '" + BuildingNo + "', '" + BuildingName + "', '" + StreetName + "','" +City + "','"+ZipCode+ "','" + StudentID + "')";
+                //establish connection
+                SqlConnection con = new SqlConnection(ConnectionString);
+
+                //open connection
+                con.Open();
+
+                //prepare query to check student id 
+                string Query = "SELECT StudentID FROM student WHERE S_username = @S_username";
 
                 //execute query
-                SqlCommand cmd = new SqlCommand(Query, con);
-                cmd.ExecuteNonQuery();
+                SqlCommand checkCmd = new SqlCommand(Query, con);
+                checkCmd.Parameters.AddWithValue("@S_username", Session["S_username"].ToString());
+                object result = checkCmd.ExecuteScalar();
+
+                if (result != null && result.ToString() == StudentID)
+                {
+                    //prepare query to insert
+                    string query = "INSERT INTO registeredevents_table(EventID, EventName, Description, Date, Time, BuildingNo, BuildingName, StreetName, City, ZipCode, StudentID) " +
+                                   "VALUES (@EventID, @EventName, @Description, @Date, @Time, @BuildingNo, @BuildingName, @StreetName, @City, @ZipCode, @StudentID)";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@EventID", EventID);
+                    cmd.Parameters.AddWithValue("@EventName", EventName);
+                    cmd.Parameters.AddWithValue("@Description", Description);
+                    cmd.Parameters.AddWithValue("@Date", Date);
+                    cmd.Parameters.AddWithValue("@Time", Time);
+                    cmd.Parameters.AddWithValue("@BuildingNo", BuildingNo);
+                    cmd.Parameters.AddWithValue("@BuildingName", BuildingName);
+                    cmd.Parameters.AddWithValue("@StreetName", StreetName);
+                    cmd.Parameters.AddWithValue("@City", City);
+                    cmd.Parameters.AddWithValue("@ZipCode", ZipCode);
+                    cmd.Parameters.AddWithValue("@StudentID", StudentID);
+
+                    //execute query
+                    cmd.ExecuteNonQuery();
+
+                    Response.Write("<script>alert('Registered successfully!');</script>");
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    Response.Write("<script>alert('StudentID does not match. Cannot insert the event details.');</script>");
+                }
 
                 //close connection
                 con.Close();
-                Response.Write("<script>alert('Registered successfully!');</script>");
-
-                GridView1.DataBind();
-
             }
             catch (Exception exception)
             {
                 Response.Write("<script>alert('Error: " + exception.Message + "');</script>");
             }
-
         }
+
 
 
         //go button for searching event 
